@@ -1,0 +1,20 @@
+#!/bin/bash -login
+#PBS -l walltime=48:00:00,nodes=02:ppn=4,mem=32gb
+#PBS -q main
+#PBS -M snisiarc@gmail.com
+#PBS -m abe
+#PBS -A ged
+
+module load python
+
+cd /mnt/scratch/howead/test_fan
+
+mkdir temp
+split -l 10000 ~/metag-benchmark/R-files/auto-bots/taxonomy/gi_taxid_nucl.dmp ./temp/gi_taxid_part.
+
+source ~/ete3/bin/activate
+
+for i in ./temp/gi_taxid_part.*; do echo "python get-taxonomy-ete3_fixed_rank.py $i > $i.fixed"; done > get_rank_for_gi_taxid.sh
+
+cat get_rank_for_gi_taxid.sh | ~/OLD-2015/software/parallel-20100424/src/parallel
+
