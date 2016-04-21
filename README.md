@@ -14,8 +14,8 @@ from different families. Blast queries are metagenomic sequences available publi
     for i in GENE.x.METAG.*.m8; do python blast-m8-parser-best_to_1_file.py $i; done > OUTPUT.txt
     ```
 
-3. 
-_taxid_get_taxa.qsub
--rw-r--r--  1 fanyang  staff   1.5K Apr 15 11:28 get-taxonomy-ete3_fixed_rank.py
--rw-r--r--  1 fanyang  staff   844B Apr 15 13:02 blast-m8-parser-best_to_1_file.py
--rw-------  1 fanyang  staff   1.3K Apr 15 13:31 convert_bests_to_counts.R
+3. subset the blast result (from step 2) by specifying an e-value, and convert the best hits to a count table:
+    ```
+    Rscript convert_bests_to_counts.R BEST_HITS.txt MAX_E-VALUE OUTPUT_COUNTS.txt
+    ```
+
