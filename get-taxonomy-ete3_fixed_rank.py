@@ -20,8 +20,9 @@ ncbi = NCBITaxa()
 #ncbi.update_taxonomy_database()
 
 fp = open('taxa-ids-not-found.txt', 'w')
-hier = ["kingdom", "phylum", "class", "order", "family", "genus", "species"]
+hier = ["superkingdom", "kingdom", "phylum", "class", "order", "family", "genus", "species"]
 
+missing = []
 for x in open(sys.argv[1]):
     dat = x.rstrip().split('\t')[-1]
     try:
@@ -41,7 +42,8 @@ for x in open(sys.argv[1]):
 	for key in sorted(d):
 		print x.rstrip() + "\t"+ str(key)+"\t"+d[key]
     except ValueError:
-        fp.write('%s\n' % x.rstrip())
+	missing.append(x.rstrip())
+fp.write('\n'.join(missing))
 
 
 
