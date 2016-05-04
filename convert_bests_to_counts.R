@@ -25,5 +25,5 @@ test<-subset(data, V13 < args[2])
 test_long<-count(test, c("V1", "V2", "V4"))
 
 ## creating a sparse matrix formatted table
-test_wide<-dcast(test_long, V1+V4 ~ V2, value.var="freq")
+test_wide<-dcast(test_long, V1+V4 ~ V2, value.var="freq", fill = 0)
 write.table(test_wide, args[3], sep="\t", quote=F, row.names=F)
